@@ -1,0 +1,26 @@
+import math
+
+
+def parse_record(line: str) -> dict:
+    parts = line.split(";")
+    if len(parts) != 3:
+        raise ValueError(f"Ожидалось 3 поля, получено {len(parts)}: {line!r}")
+
+    city, temp_str, date = parts[0].strip(), parts[1].strip(), parts[2].strip()
+
+    if not city or not date:
+        raise ValueError(f"Город и дата не могут быть пустыми: {line!r}")
+
+    try:
+        temp = float(temp_str)
+    except ValueError as err:
+        raise ValueError(f"Некорректная температура {temp_str!r}: {line!r}") from err
+
+    if math.isnan(temp) or math.isinf(temp):
+        raise ValueError(f"Температура должна быть конечным числом: {line!r}")
+
+    return {
+        "city": city,
+        "temp": temp,
+        "date": date,
+    }
