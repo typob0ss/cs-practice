@@ -21,7 +21,7 @@ def parse_record(line: str) -> dict:
 
     return {
         "city": city,
-        "temp": temperature,
+        "temperature": temperature,
         "date": date,
     }
 
