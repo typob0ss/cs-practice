@@ -12,16 +12,16 @@ def parse_record(line: str) -> dict:
         raise ValueError(f"Город и дата не могут быть пустыми: {line!r}")
 
     try:
-        temp = float(temp_str)
+        temperature = float(temp_str)
     except ValueError as err:
         raise ValueError(f"Некорректная температура {temp_str!r}: {line!r}") from err
 
-    if math.isnan(temp) or math.isinf(temp):
+    if math.isnan(temperature) or math.isinf(temperature):
         raise ValueError(f"Температура должна быть конечным числом: {line!r}")
 
     return {
         "city": city,
-        "temp": temp,
+        "temp": temperature,
         "date": date,
     }
 
@@ -45,8 +45,8 @@ def average_by_city(records: list[dict]) -> dict:
 
     for rec in records:
         city = rec["city"]
-        temp = rec["temp"]
-        totals[city] = totals.get(city, 0.0) + temp
+        temperature = rec["temp"]
+        totals[city] = totals.get(city, 0.0) + temperature
         counts[city] = counts.get(city, 0) + 1
 
     return {city: round(totals[city] / counts[city], 1) for city in totals}
