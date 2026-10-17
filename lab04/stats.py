@@ -24,6 +24,8 @@ def parse_record(line: str) -> dict:
         "temp": temp,
         "date": date,
     }
+
+
 def read_valid(lines: list[str]) -> list[dict]:
     valid_records = []
     for line in lines:
@@ -35,6 +37,8 @@ def read_valid(lines: list[str]) -> list[dict]:
         except ValueError:
             continue
     return valid_records
+
+
 def average_by_city(records: list[dict]) -> dict:
     totals = {}
     counts = {}
