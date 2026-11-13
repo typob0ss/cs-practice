@@ -2,7 +2,9 @@ def count_by_extension(paths: list[str]) -> dict[str, int]:
     extensions = {}
     for path in paths:
         name = path.split("/")[-1]  # only the file name, not the folders
-        extension = name.split(".")[-1].lower() if "." in name else ""
+        dot = name.rfind(".")
+        # a leading dot (".gitignore") marks a hidden file, not an extension
+        extension = name[dot + 1:].lower() if dot > 0 else ""
         extensions[extension] = extensions.get(extension, 0) + 1
     return extensions
 
