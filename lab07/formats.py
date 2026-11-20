@@ -33,8 +33,8 @@ def _parse_value(value: str):
         return int(value)
     except ValueError:
         try:
-            # Дробная часть может отделяться точкой или запятой.
-            return float(value.replace(",", "."))
+            # Число с запятой не преобразуем: оно остаётся строкой.
+            return float(value)
         except ValueError:
             return value
 
