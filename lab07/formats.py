@@ -16,7 +16,7 @@ def csv_to_records(text: str) -> list[dict]:
         line = line.split(",")
         record = {}
         for i in range(len(head)):
-            record[head[i]] = line[i]
+            record[head[i].strip()] = line[i].strip()
         data.append(record)
     return data
 
@@ -33,7 +33,8 @@ def _parse_value(value: str):
         return int(value)
     except ValueError:
         try:
-            return float(value)
+            # Дробная часть может отделяться точкой или запятой.
+            return float(value.replace(",", "."))
         except ValueError:
             return value
 
